@@ -4,8 +4,9 @@ fetch("data.json").then(r=>r.json()).then(points=>{
   const cluster = L.markerClusterGroup();
   points.forEach(p=>{
     const icon = L.divIcon({
-      html:`<img class="rotating" src="icon.png" style="transform:rotate(${p.vril}deg)" />`,
-      className:"vril-icon", iconSize:[40,40]
+      html: `<img class="vril-icon" src="icon.png" style="--speed: ${Math.max(1, 100 / Math.abs(p.vril || 1))}s;" />`,
+      className: "",
+      iconSize: [20, 20]
     });
     const m = L.marker([p.lat,p.lon],{icon});
     m.bindPopup(`<b>${p.city}, ${p.country}</b><br>
